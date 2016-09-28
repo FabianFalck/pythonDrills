@@ -1,10 +1,18 @@
 # reading from a text file
 
-with open('PythonDrills/PractisePython/nameslist.txt','r') as open_file:
+with open('PythonDrills/PractisePython/Training_01.txt','r') as open_file:
     line = open_file.readline().strip('\n')
     dict = {}
     while line:
-        dict = countName(line, dict)
+        count_hor = 0
+        line_stripped = ''
+        for s in line:
+            if s == '/':
+                count_hor += 1
+            if (count_hor == 2) and (s != '/'):
+                line_stripped = line_stripped + s
+
+        dict = countName(line_stripped, dict)
         line = open_file.readline().strip('\n')
 
 def countName(line, dict):
