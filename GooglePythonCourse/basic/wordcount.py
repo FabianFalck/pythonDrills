@@ -81,6 +81,9 @@ def print_top_key(tuple):
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
+
+# The main method was adjusted by me since I find this way to be a more logic capsuling of the problem.
+
 def main():
   if len(sys.argv) != 3:
     print 'usage: ./wordcount.py {--count | --topcount} file'
