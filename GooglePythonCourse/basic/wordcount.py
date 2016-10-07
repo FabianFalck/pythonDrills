@@ -38,8 +38,40 @@ print_words() and print_top().
 """
 
 import sys
+import codecs
 
-# +++your code here+++
+
+def build_datastructure(filename):
+  #Data structure
+  file = codecs.open(filename, 'rU', 'utf-8')
+  wordcount_dic = {}
+  for line in file:
+    line_splitted = line.split()
+    for word in line_splitted:
+      if word in wordcount_dic:
+        wordcount_dic[word] += 1
+      else:
+        wordcount_dic[word] = 1
+  return wordcount_dic.items() #returning a list of tuples
+
+#Printing words in alphabetical order
+def print_words(structure):
+  structure_sorted = sorted(structure, key = print_words_key)
+  for tuple in structure_sorted:
+    print tuple[0] + ' ' + str(tuple[1])
+
+def print_words_key(tuple):
+  return tuple[0]
+
+def print_top(structure):
+  structure_sorted = sorted(structure, key = print_top_key, reverse = False) #largest counts are below to see them
+  for tuple in structure_sorted:
+    print tuple[0] + ' ' + str(tuple[1])
+
+def print_top_key(tuple):
+  return tuple[1]
+
+
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
@@ -56,10 +88,11 @@ def main():
 
   option = sys.argv[1]
   filename = sys.argv[2]
+  structure = build_datastructure(filename)
   if option == '--count':
-    print_words(filename)
+    print_words(structure)
   elif option == '--topcount':
-    print_top(filename)
+    print_top(structure)
   else:
     print 'unknown option: ' + option
     sys.exit(1)
