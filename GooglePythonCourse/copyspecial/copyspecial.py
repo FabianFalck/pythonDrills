@@ -17,6 +17,12 @@ import commands
 
 # +++your code here+++
 # Write functions and modify main() to call them
+def printdir(dir):
+  filenames = os.listdir(dir)
+  for filename in filenames:
+    if re.search('__\w+__', filename):
+      abspath = os.path.abspath(os.path.join(dir, filename))
+      print abspath
 
 
 
